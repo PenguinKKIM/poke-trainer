@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { GlobalStyle } from "./styles/GlobalStyle";
-import NavBar from "./components/Navigation/NavBar";
-import LoginInput from "./components/FormInput/LoginInput";
+import { RouterProvider } from "react-router-dom";
+import Router from "./router/Router";
 
 const Container = styled.div`
   width: 50%;
@@ -16,8 +16,7 @@ function App() {
     <>
       <GlobalStyle />
       <Container>
-        <NavBar />
-        <LoginInput />
+        <RouterProvider router={Router} />
       </Container>
     </>
   );
