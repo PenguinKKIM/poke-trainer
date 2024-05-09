@@ -4,11 +4,12 @@ import { RouterProvider } from "react-router-dom";
 import Router from "./router/Router";
 
 const Container = styled.div`
-  width: 50%;
   min-height: 100vh;
-
   display: flex;
   flex-direction: column;
+  background-image: url("/image/background/all_bg.png");
+  background-position: center;
+  background-size: cover;
 `;
 
 function App() {
