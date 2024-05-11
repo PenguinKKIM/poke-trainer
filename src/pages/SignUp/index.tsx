@@ -4,17 +4,18 @@ import JoinInput from "../../components/FormInput/JoinInput";
 function SignUpPage() {
   return (
     <FormContainer>
+      <span>회원가입</span>
       <JoinInput />
     </FormContainer>
   );
 }
 const FormContainer = styled.div`
   width: 80%;
-  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 2rem;
   background-color: var(--color-prime);
   border-radius: 10px;
   border: 2px solid var(--water);

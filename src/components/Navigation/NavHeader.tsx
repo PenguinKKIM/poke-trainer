@@ -25,6 +25,16 @@ const NavHeaderUl = styled.ul`
   }
 `;
 
+const LogoImg = styled.img`
+  background-color: white;
+  padding: 0.2rem;
+  width: 30px;
+  height: 30px;
+  margin-right: 1rem;
+  border-radius: 10px;
+  border: 2px solid var(--water);
+`;
+
 const NavHeaderButton = styled.button`
   background-color: rgba(0, 0, 0, 0);
   border: none;
@@ -46,7 +56,10 @@ function NavHeader() {
     <>
       <NavHeaderUl>
         <li>
-          <Link to="/">포켓몬 고 트레이너</Link>
+          <Link to="/">
+            <LogoImg src="image/logo/title_logo.gif" alt="피카츄" />
+            포켓몬 고 트레이너
+          </Link>
         </li>
         <li>
           <NavHeaderButton onClick={toggleNav}>

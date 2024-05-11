@@ -5,6 +5,7 @@ import styled from "styled-components";
 function LoginPage() {
   return (
     <FormContainer>
+      <span>로그인</span>
       <LoginInput />
       회원 가입 안하셨나요 ? <Link to="/">회원가입 하러가기</Link>
     </FormContainer>
