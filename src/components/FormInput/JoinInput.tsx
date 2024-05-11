@@ -6,10 +6,11 @@ import Swal from "sweetalert2";
 
 function JoinInput() {
   const [userId, setUserId] = useState("");
+  const [joinError, setJoinError] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userPasswordCheck, setUserPasswordCheck] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [userEmail, setUserEmail] = useState("");
-
   const onChangeId = (event: React.FormEvent<HTMLInputElement>) => {
     onChangeInput(event, setUserId);
   };
@@ -26,13 +27,13 @@ function JoinInput() {
     event.stopPropagation();
     switch (true) {
       case userPassword === "":
-        console.log("비밀번호를 입력해주세요.");
+        setPasswordError("비밀번호를 입력해주세요.");
         break;
       case userPassword !== userPasswordCheck:
-        console.log("비밀번호 확인이 일치하지 않습니다. 다시 입력해주세요.");
+        setPasswordError("비밀번호 확인이 일치하지 않습니다. 다시 입력해주세요.");
         break;
       default:
-        console.log("비밀번호 확인이 일치합니다.");
+        setPasswordError("비밀번호 확인이 일치합니다.");
         break;
     }
   };
@@ -43,9 +44,18 @@ function JoinInput() {
 
   const onSubmitJoin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    Swal.fire({
-      html: "<p>회원가입이 되었습니다</p>",
-    });
+    switch (true) {
+      case userId === "":
+        setJoinError("아이디를 입력해주세요");
+        break;
+      case userEmail === "":
+        setJoinError("이메일을 입력해주세요");
+        break;
+      default:
+        Swal.fire({
+          html: "<p>회원가입이 되었습니다</p>",
+        });
+    }
   };
 
   return (
@@ -60,6 +70,7 @@ function JoinInput() {
             onChange={onChangeId}
             placeholder="사용하실 아이디를 입력하세요"
           />
+          <span>{joinError}</span>
         </Label>
         <Label htmlFor="password">
           비밀번호
@@ -80,6 +91,7 @@ function JoinInput() {
             onChange={onChangePasswordCheck}
             placeholder="패스워드를 다시 입력해주세요."
           />
+          <span>{passwordError}</span>
         </Label>
 
         <NormalButton type="button" onClick={handlePasswordCheck} btncolor="#40b088">
@@ -95,6 +107,7 @@ function JoinInput() {
             onChange={onChangeEmail}
             placeholder="이메일을 입력해주세요"
           />
+          <span>{joinError}</span>
         </Label>
         <NormalButton type="submit">가입하기</NormalButton>
       </FormContainer>

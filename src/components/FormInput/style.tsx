@@ -19,6 +19,10 @@ export const Label = styled.label`
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+  span {
+    color: var(--fire);
+    padding: 0.2rem;
+  }
 `;
 
 export const Input = styled.input`
