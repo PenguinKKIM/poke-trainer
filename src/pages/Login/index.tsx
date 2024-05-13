@@ -7,7 +7,7 @@ function LoginPage() {
     <FormContainer>
       <span>로그인</span>
       <LoginInput />
-      회원 가입 안하셨나요 ? <Link to="/">회원가입 하러가기</Link>
+      회원 가입 안하셨나요 ? <Link to="/signup">회원가입 하러가기</Link>
     </FormContainer>
   );
 }

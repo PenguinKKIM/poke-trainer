@@ -1,44 +1,4 @@
-import styled from "styled-components";
-
-type NavUl = {
-  toggle: boolean;
-};
-
-const NavUl = styled.ul<NavUl>`
-  display: ${(props) => (props.toggle ? "flex" : "none")};
-  flex-direction: column;
-  gap: 0.5rem;
-  font-weight: 700;
-  position: absolute;
-  top: 3.5rem;
-  z-index: 1000;
-  @media screen and (min-width: 850px) {
-    flex-direction: row;
-  }
-`;
-
-const NavLi = styled.li`
-  width: 80vw;
-  display: flex;
-  align-items: flex-end;
-  gap: 0.2rem;
-
-  background-color: var(--color-prime);
-  padding: 0.5rem 1rem;
-  border: 2px solid var(--water);
-  border-radius: 10px;
-  img {
-    width: 30px;
-    height: 30px;
-  }
-  &:hover {
-    cursor: pointer;
-    background-color: var(--list-background-color);
-  }
-  @media screen and (min-width: 850px) {
-    width: inherit;
-  }
-`;
+import { NavLi, NavUl } from "./style";
 
 function NavBar(props: { toggle: boolean }) {
   return (

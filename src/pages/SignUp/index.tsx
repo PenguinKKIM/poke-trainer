@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import JoinInput from "../../components/FormInput/JoinInput";
+import { Link } from "react-router-dom";
 
 function SignUpPage() {
   return (
     <FormContainer>
       <span>회원가입</span>
       <JoinInput />
+      회원 가입 하셨나요? <Link to="/login">로그인 하러가기</Link>
     </FormContainer>
   );
 }
