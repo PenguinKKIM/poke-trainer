@@ -4,7 +4,7 @@ import { FormContainer, Input, Label } from "./style";
 import onChangeInput from "./OnChangeInput";
 import Swal from "sweetalert2";
 import { auth } from "../../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +13,7 @@ function LoginInput() {
 
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+
 
   const [emailError, setEmailError] = useState("");
   const [fireBaseError, setFireBaseError] = useState("");
@@ -41,7 +42,14 @@ function LoginInput() {
         setLoading(true);
         try {
           await signInWithEmailAndPassword(auth, userEmail, userPassword);
-          navigate("/");
+          Swal.fire({
+            html: "<p> 로그인 되었습니다 </p>",
+            showConfirmButton: true,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/");
+            }
+          })
         } catch (error) {
           if (error instanceof FirebaseError) {
             setFireBaseError(error.message);
@@ -51,6 +59,31 @@ function LoginInput() {
         }
     }
   };
+
+  const handleGoogleLogin = async (event: React.MouseEvent) => {
+    event.preventDefault();
+    const provider = new GoogleAuthProvider();
+    setLoading(true);
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const googleUser = result.user;
+      console.log(googleUser);
+      Swal.fire({
+        html: "<p> 로그인 되었습니다 </p>",
+        showConfirmButton: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/");
+        }
+      })
+    } catch (error) {
+      if (error instanceof FirebaseError) {
+        setFireBaseError(error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <FormContainer onSubmit={onSubmitLogin}>
@@ -81,6 +114,9 @@ function LoginInput() {
 
       <NormalButton type="submit" fontcolor="white" btncolor="#0000FF">
         로그인
+      </NormalButton>
+      <NormalButton onClick={handleGoogleLogin}>
+        구글 로그인
       </NormalButton>
       <span>{fireBaseError}</span>
     </FormContainer>
