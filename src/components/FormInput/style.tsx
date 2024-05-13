@@ -14,13 +14,13 @@ export const Label = styled.label`
   width: 100%;
   padding: 1rem;
   font-size: 0.9rem;
-  color: gray;
+  color: var(--normal);
 
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
   span {
-    color: var(--fire);
+    color: var(--poke-dex-red);
     padding: 0.2rem;
   }
 `;
@@ -29,5 +29,5 @@ export const Input = styled.input`
   padding: 1rem;
   border-radius: 10px;
   border: none;
-  border: 1px solid gray;
+  border: 1px solid var(--normal);
 `;
