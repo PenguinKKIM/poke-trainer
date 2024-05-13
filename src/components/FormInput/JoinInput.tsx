@@ -11,15 +11,18 @@ import { FirebaseError } from "firebase/app";
 
 function JoinInput() {
   const navigate = useNavigate();
+
   const [userId, setUserId] = useState("");
-  const [joinError, setJoinError] = useState("");
-  const [emailError, setEmailError] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userPasswordCheck, setUserPasswordCheck] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [userEmail, setUserEmail] = useState("");
   const [passwordCheckClicked, setPasswordCheckClicked] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+
+  const [joinError, setJoinError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [fireBaseError, setFireBaseError] = useState("");
+
   const [loading, setLoading] = useState(false);
 
   const onChangeId = (event: React.FormEvent<HTMLInputElement>) => {
