@@ -70,4 +70,7 @@ body{
   font-weight: 500;
   color: #333333;
 }
+button{
+  font-family: "Galmuri";
+}
 `;

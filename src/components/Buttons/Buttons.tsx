@@ -14,7 +14,6 @@ export const NormalButton = styled.button<ButtonProps>`
   border: none;
   border: 1px solid gray;
   border-radius: 10px;
-
   background-color: ${(props) => props.btncolor};
   font-size: ${(props) => props.fontsize};
   color: ${(props) => props.fontcolor};
@@ -22,8 +21,8 @@ export const NormalButton = styled.button<ButtonProps>`
   &:hover {
     cursor: pointer;
     background-color: ${(props) => {
-      return `${props.btncolor}7f`;
-    }};
+    return `${props.btncolor}7f`;
+  }};
   }
 `;
 
