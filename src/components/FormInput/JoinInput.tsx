@@ -81,6 +81,10 @@ function JoinInput() {
           const credentials = await createUserWithEmailAndPassword(auth, userEmail, userPassword);
           console.log(credentials.user);
           await updateProfile(credentials.user, { displayName: userId });
+          Swal.fire({
+            html: "<p> 회원가입이 완료 되었습니다. </p>",
+            showConfirmButton: true,
+          });
           navigate("/");
         } catch (error) {
           if (error instanceof FirebaseError) {
