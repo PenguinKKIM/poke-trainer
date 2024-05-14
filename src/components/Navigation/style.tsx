@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 interface NavUl {
   toggle: boolean;
-};
+}
 
 export const NavUl = styled.ul<NavUl>`
   display: ${(props) => (props.toggle ? "flex" : "none")};
@@ -47,11 +47,11 @@ export const NavHeaderUl = styled.ul`
   background-color: var(--poke-dex-red);
   padding: 0.5rem 1rem;
   position: relative;
-  li{
+  li {
     display: flex;
   }
   li a {
-    text-shadow:var(--text-strock-3px-white);
+    text-shadow: var(--text-strock-3px-white);
   }
 `;
 
@@ -75,5 +75,8 @@ export const NavHeaderButton = styled.button`
   img {
     width: 30px;
     height: 30px;
+  }
+  span {
+    text-shadow: var(--text-strock-3px-white);
   }
 `;
