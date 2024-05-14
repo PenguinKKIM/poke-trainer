@@ -103,7 +103,7 @@ function JoinInput() {
       ) : (
         <FormContainer onSubmit={onSubmitJoin}>
           <Label htmlFor="userId">
-            아이디
+            닉네임
             <Input
               type="text"
               name="userId"
