@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { NavLi, NavUl } from "./style";
 
 function NavBar(props: { toggle: boolean }) {
@@ -13,8 +14,10 @@ function NavBar(props: { toggle: boolean }) {
           트레이너 등록 하기
         </NavLi>
         <NavLi>
-          <img src="/image/icon/success_icon.png" alt="메타몽아이콘" />
-          레이드 구해요
+          <Link to="raid">
+            <img src="/image/icon/success_icon.png" alt="메타몽아이콘" />
+            레이드 구해요
+          </Link>
         </NavLi>
         <NavLi>
           <img src="/image/icon/ball_icon.png" alt="메타몽아이콘" />
