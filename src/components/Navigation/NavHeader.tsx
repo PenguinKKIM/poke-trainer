@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import { useEffect, useState } from "react";
 import { auth } from "../../firebase";
-import { LogoImg, NavHeaderButton, NavHeaderUl } from "./style";
+import { DisplayNameConatiner, LogoImg, NavHeaderButton, NavHeaderUl } from "./style";
 import Swal from "sweetalert2";
 
 function NavHeader() {
@@ -44,7 +44,7 @@ function NavHeader() {
         <li>
           <Link to="/" style={{ display: "flex", alignItems: "center" }}>
             <LogoImg src="image/logo/title_logo.gif" alt="피카츄" />
-            포켓몬 고 트레이너
+            포켓몬 트레이너
           </Link>
         </li>
         <li>
@@ -53,12 +53,12 @@ function NavHeader() {
               <span>로그인</span>
             </NavHeaderButton>
           ) : (
-            <>
+            <DisplayNameConatiner>
               <div>반갑습니다! {currentUser.displayName} 님!</div>
               <NavHeaderButton onClick={handleLogout}>
                 <span>로그아웃</span>
               </NavHeaderButton>
-            </>
+            </DisplayNameConatiner>
           )}
           <NavHeaderButton onClick={toggleNav}>
             <img src="/image/icon/ball.png" alt="네비 버튼 이미지" />

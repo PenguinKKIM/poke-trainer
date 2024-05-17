@@ -80,3 +80,13 @@ export const NavHeaderButton = styled.button`
     text-shadow: var(--text-strock-3px-white);
   }
 `;
+
+export const DisplayNameConatiner = styled.div`
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  div{
+    font-size: 0.8rem;
+    text-shadow: var(--text-strock-3px-white);
+  }
+`;
