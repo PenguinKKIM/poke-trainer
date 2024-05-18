@@ -31,3 +31,56 @@ export const Input = styled.input`
   border: none;
   border: 1px solid var(--normal);
 `;
+
+export const TextArea = styled.textarea`
+  height: 5rem;
+  resize: none;
+  padding: 1rem;
+  border-radius: 10px;
+`;
+
+export const HeaderContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const Name = styled.div`
+  padding: 1rem;
+  text-shadow: var(--text-strock-3px-white);
+`;
+
+export const DropdownContainer = styled.div`
+  position: relative;
+  width: 30%;
+`;
+
+export const DropdownHeader = styled.div`
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--normal);
+  background-color: white;
+  cursor: pointer;
+`;
+
+export const DropdownListContainer = styled.div`
+  position: absolute;
+  top: 105%;
+  width: 100%;
+  z-index: 1000;
+`;
+
+export const DropdownList = styled.ul`
+  border: 1px solid var(--normal);
+  border-radius: 10px;
+  background-color: var(--light);
+  max-height: 10rem;
+  overflow-y: auto;
+`;
+
+export const ListItem = styled.li`
+  padding: 1rem;
+  background-color: white;
+  cursor: pointer;
+`;

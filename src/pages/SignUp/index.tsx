@@ -11,6 +11,7 @@ function SignUpPage() {
     </FormContainer>
   );
 }
+
 const FormContainer = styled.div`
   width: 80%;
   display: flex;
@@ -25,4 +26,5 @@ const FormContainer = styled.div`
     width: 60%;
   }
 `;
+
 export default SignUpPage;

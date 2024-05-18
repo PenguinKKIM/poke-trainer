@@ -1,12 +1,15 @@
 import styled from "styled-components";
-import TextForm from "../../components/CreateText/TextForm";
+// import TextForm from "../../components/FormInput/TextForm";
+import RaidList from "../../components/RaidList/RaidList";
 
 function RaidPage() {
-  return <>
-    <FormContainer>
-      <TextForm />
-    </FormContainer>
-  </>;
+  return (
+    <>
+      <FormContainer>
+        <RaidList />
+      </FormContainer>
+    </>
+  );
 }
 
 const FormContainer = styled.div`
