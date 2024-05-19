@@ -17,6 +17,7 @@ import {
 import Loading from "../Loading/Loading";
 import Swal from "sweetalert2";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function TextForm() {
   const [title, setTitle] = useState("");
@@ -27,6 +28,7 @@ function TextForm() {
   const [isOpen, setIsOpen] = useState(false);
 
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   const currentUser = auth.currentUser;
   const onChangeText = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -67,6 +69,7 @@ function TextForm() {
           setTitle("");
           setText("");
           setCategory("");
+          navigate(-1);
         }
       });
     } catch (error) {

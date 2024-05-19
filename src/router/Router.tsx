@@ -4,6 +4,7 @@ import Layout from "../pages/layout";
 import LoginPage from "../pages/Login";
 import SignUpPage from "../pages/SignUp";
 import RaidPage from "../pages/Raid";
+import Write from "../pages/Raid/Write";
 
 const Router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const Router = createBrowserRouter([
       {
         path: "raid",
         element: <RaidPage />,
+      },
+      {
+        path: "raid/write",
+        element: <Write />,
       },
     ],
   },
