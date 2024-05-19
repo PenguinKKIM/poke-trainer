@@ -62,7 +62,19 @@ function LoginInput() {
           });
         } catch (error) {
           if (error instanceof FirebaseError) {
-            console.log(error.code);
+            let errorMessage = "알 수 없는 오류가 발생했습니다";
+            switch (error.code) {
+              case AuthErrorCodes.INVALID_APP_CREDENTIAL:
+                errorMessage = "등록되지 않은 계정 입니다";
+                break;
+              case AuthErrorCodes.NETWORK_REQUEST_FAILED:
+                errorMessage = "네트워크 오류가 발생했습니다";
+                break;
+              default:
+                errorMessage = "오류가 발생했습니다: " + error.message;
+                break;
+            }
+            setFireBaseError(errorMessage);
           }
         } finally {
           setLoading(false);
@@ -88,19 +100,7 @@ function LoginInput() {
       });
     } catch (error) {
       if (error instanceof FirebaseError) {
-        let errorMessage = "알 수 없는 오류가 발생했습니다";
-        switch (error.code) {
-          case AuthErrorCodes.INVALID_APP_CREDENTIAL:
-            errorMessage = "등록되지 않은 계정 입니다";
-            break;
-          case AuthErrorCodes.NETWORK_REQUEST_FAILED:
-            errorMessage = "네트워크 오류가 발생했습니다";
-            break;
-          default:
-            errorMessage = "오류가 발생했습니다: " + error.message;
-            break;
-        }
-        setFireBaseError(errorMessage);
+        console.log(error.message);
       }
     } finally {
       setLoading(false);
