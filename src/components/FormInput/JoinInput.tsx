@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NormalButton } from "../Buttons/Buttons";
 import onChangeInput from "./OnChangeInput";
-import { FormContainer, Input, Label } from "./style";
+import { ErrorMessage, FormContainer, Input, Label } from "./style";
 import Swal from "sweetalert2";
 import Loading from "../Loading/Loading";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -14,9 +14,9 @@ function JoinInput() {
 
   const [userId, setUserId] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [userPasswordCheck, setUserPasswordCheck] = useState("");
   const [passwordCheckClicked, setPasswordCheckClicked] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
 
   const [joinError, setJoinError] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -60,22 +60,44 @@ function JoinInput() {
     onChangeInput(event, setUserEmail);
   };
 
+  const setJoinErrorMessage = (error: FirebaseError) => {
+    let errorMessage = "알 수 없는 오류가 발생했습니다";
+    switch (error.code) {
+      case "auth/email-already-in-use":
+        errorMessage = "이미 가입 된 이메일 입니다";
+        break;
+      default:
+        errorMessage = "오류가 발생했습니다: " + error.message;
+        break;
+    }
+    setFireBaseError(errorMessage);
+  };
+
   const onSubmitJoin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const setErrorEmpty = () => {
+      setJoinError("");
+      setPasswordError("");
+      setEmailError("");
+    };
     switch (true) {
       case loading:
         Swal.fire("로딩 중입니다. 잠시만 기다려 주세요.");
         return;
       case userId === "":
+        setErrorEmpty();
         setJoinError("닉네임을 입력해주세요");
         break;
       case passwordCheckClicked !== true:
+        setErrorEmpty();
         setPasswordError("비밀번호를 확인해주세요");
         break;
       case userEmail === "":
+        setErrorEmpty();
         setEmailError("이메일을 입력해 주세요");
         break;
       default:
+        setErrorEmpty();
         setLoading(true);
         try {
           const credentials = await createUserWithEmailAndPassword(auth, userEmail, userPassword);
@@ -88,7 +110,7 @@ function JoinInput() {
           navigate("/");
         } catch (error) {
           if (error instanceof FirebaseError) {
-            setFireBaseError(error.message);
+            setJoinErrorMessage(error);
           }
         } finally {
           setLoading(false);
@@ -111,7 +133,7 @@ function JoinInput() {
               onChange={onChangeId}
               placeholder="사용하실 닉네임을 입력하세요"
             />
-            <span>{joinError}</span>
+            <ErrorMessage>{joinError}</ErrorMessage>
           </Label>
           <Label htmlFor="password">
             비밀번호
@@ -132,10 +154,10 @@ function JoinInput() {
               onChange={onChangePasswordCheck}
               placeholder="패스워드를 다시 입력해주세요."
             />
-            <span>{passwordError}</span>
+            <ErrorMessage>{passwordError}</ErrorMessage>
           </Label>
 
-          <NormalButton type="button" onClick={handlePasswordCheck} btncolor="#40b088">
+          <NormalButton type="button" onClick={handlePasswordCheck} btncolor="var(--grass)">
             비밀번호 확인
           </NormalButton>
 
@@ -148,10 +170,12 @@ function JoinInput() {
               onChange={onChangeEmail}
               placeholder="이메일을 입력해주세요"
             />
-            <span>{emailError}</span>
+            <ErrorMessage>{emailError}</ErrorMessage>
           </Label>
-          <NormalButton type="submit">가입하기</NormalButton>
-          <span>{fireBaseError}</span>
+          <NormalButton type="submit" btncolor="var(--water)">
+            가입하기
+          </NormalButton>
+          <ErrorMessage>{fireBaseError}</ErrorMessage>
         </FormContainer>
       )}
     </>

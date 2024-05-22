@@ -47,10 +47,12 @@ export const NavHeaderUl = styled.ul`
   background-color: var(--poke-dex-red);
   padding: 0.5rem 1rem;
   position: relative;
-  li {
-    display: flex;
-  }
-  li a {
+`;
+
+export const NavHeaderLi = styled.li`
+  display: flex;
+  align-items: center;
+  a {
     text-shadow: var(--text-strock-3px-white);
   }
 `;
@@ -84,9 +86,50 @@ export const NavHeaderButton = styled.button`
 export const DisplayNameConatiner = styled.div`
   display: flex;
   align-items: center;
-  gap: .5rem;
-  div{
+  gap: 0.5rem;
+  div {
     font-size: 0.8rem;
     text-shadow: var(--text-strock-3px-white);
   }
+`;
+
+export const TextUl = styled.ul`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+export const TextLi = styled.li`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border: 2px solid var(--water);
+  border-radius: 10px;
+  padding: 1rem 0.7rem;
+  background-color: #c3e3ff;
+  &:nth-child(2n) {
+    background-color: var(--flying);
+    border: 2px solid var(--normal);
+  }
+`;
+
+export const TextHeaderContainer = styled.header`
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px dashed var(--water);
+  h3 {
+    margin-bottom: 0.5rem;
+  }
+  p {
+    font-size: 0.7rem;
+    color: var(--normal);
+  }
+`;
+
+export const TextContainer = styled.div`
+  background-color: var(--list-background-color);
+  border-radius: 10px;
+  padding: 0.4rem;
 `;

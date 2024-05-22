@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import { useEffect, useState } from "react";
 import { auth } from "../../firebase";
-import { DisplayNameConatiner, LogoImg, NavHeaderButton, NavHeaderUl } from "./style";
+import { DisplayNameConatiner, LogoImg, NavHeaderButton, NavHeaderLi, NavHeaderUl } from "./style";
 import Swal from "sweetalert2";
 
 function NavHeader() {
@@ -37,21 +37,30 @@ function NavHeader() {
     event.preventDefault();
     navigate("/login");
   };
+  const handleToJoin = (event: React.MouseEvent) => {
+    event.preventDefault();
+    navigate("/signup");
+  };
 
   return (
     <>
       <NavHeaderUl>
-        <li>
+        <NavHeaderLi>
           <Link to="/" style={{ display: "flex", alignItems: "center" }}>
             <LogoImg src="image/logo/title_logo.gif" alt="피카츄" />
             포켓몬 트레이너
           </Link>
-        </li>
-        <li>
+        </NavHeaderLi>
+        <NavHeaderLi>
           {currentUser === null ? (
-            <NavHeaderButton onClick={handleToLogin}>
-              <span>로그인</span>
-            </NavHeaderButton>
+            <>
+              <NavHeaderButton onClick={handleToLogin}>
+                <span>로그인</span>
+              </NavHeaderButton>
+              <NavHeaderButton onClick={handleToJoin}>
+                <span>회원가입</span>
+              </NavHeaderButton>
+            </>
           ) : (
             <DisplayNameConatiner>
               <div>반갑습니다! {currentUser.displayName} 님!</div>
@@ -63,7 +72,7 @@ function NavHeader() {
           <NavHeaderButton onClick={toggleNav}>
             <img src="/image/icon/ball.png" alt="네비 버튼 이미지" />
           </NavHeaderButton>
-        </li>
+        </NavHeaderLi>
         <NavBar toggle={showNav} />
       </NavHeaderUl>
     </>

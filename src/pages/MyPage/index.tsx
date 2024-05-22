@@ -1,16 +1,15 @@
 import styled from "styled-components";
-// import TextForm from "../../components/FormInput/TextForm";
-import RaidList from "../../components/RaidList/RaidList";
+import MyPage from "../../components/FormInput/MyPage";
 
-function RaidPage() {
+function MyPagePage() {
   return (
-    <>
-      <FormContainer>
-        <RaidList />
-      </FormContainer>
-    </>
+    <FormContainer>
+      <MyPage />
+    </FormContainer>
   );
 }
+
+export default MyPagePage;
 
 const FormContainer = styled.div`
   width: 80%;
@@ -27,5 +26,3 @@ const FormContainer = styled.div`
     padding: 2rem;
   }
 `;
-
-export default RaidPage;

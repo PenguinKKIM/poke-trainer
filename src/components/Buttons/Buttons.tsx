@@ -18,14 +18,35 @@ export const NormalButton = styled.button<ButtonProps>`
   font-size: ${(props) => props.fontsize};
   color: ${(props) => props.fontcolor};
 
+  img {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+  }
   &:hover {
     cursor: pointer;
+    transition: 0.2s;
     background-color: ${(props) => {
-    return `${props.btncolor}7f`;
-  }};
+      let btnHoverColor;
+      switch (props.btncolor) {
+        case "var(--grass)":
+          btnHoverColor = "var(--bug)";
+          break;
+        case "var(--water)":
+          btnHoverColor = "var(--ice)";
+          break;
+        case "var(--poke-dex-red)":
+          btnHoverColor = "var(--psychic)";
+          break;
+        default:
+          btnHoverColor = `${props.btncolor}7f`; // 기본적으로 원래 색상에 투명도를 추가
+      }
+      return btnHoverColor;
+    }};
   }
 `;
 
 export const MiddleButton = styled(NormalButton)`
   width: 50%;
+  padding: 0.5rem;
 `;

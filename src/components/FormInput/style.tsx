@@ -18,11 +18,8 @@ export const Label = styled.label`
 
   display: flex;
   flex-direction: column;
+  padding: 1rem;
   gap: 0.2rem;
-  span {
-    color: var(--poke-dex-red);
-    padding: 0.2rem;
-  }
 `;
 
 export const Input = styled.input`
@@ -30,6 +27,11 @@ export const Input = styled.input`
   border-radius: 10px;
   border: none;
   border: 1px solid var(--normal);
+`;
+
+export const ErrorMessage = styled.span`
+  color: var(--poke-dex-red);
+  padding: 0.2rem;
 `;
 
 export const TextArea = styled.textarea`
@@ -68,7 +70,7 @@ export const DropdownListContainer = styled.div`
   position: absolute;
   top: 105%;
   width: 100%;
-  z-index: 1000;
+  z-index: 100;
 `;
 
 export const DropdownList = styled.ul`
@@ -83,4 +85,29 @@ export const ListItem = styled.li`
   padding: 1rem;
   background-color: white;
   cursor: pointer;
+`;
+
+export const ButtonContainer = styled.div`
+  width: 60%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  @media screen and (min-width: 850px) {
+    width: 35%;
+  }
+`;
+
+export const UserContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: plum;
+  border: 3px solid var(--water);
+  border-radius: 10px;
+  padding: 1rem;
+  gap: 1rem;
+`;
+
+export const UserImage = styled.img`
+  width: 100px;
+  height: 100px;
 `;

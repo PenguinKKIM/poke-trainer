@@ -13,6 +13,10 @@ function Footer() {
         <Link to="https://www.flaticon.com/free-icons/pokemon" title="pokemon icons">
           Pokemon icons created by Darius Dan - Flaticon
         </Link>
+        ||
+        <Link to="https://www.flaticon.com/free-icons/google" title="google icons">
+          Google icons created by Freepik - Flaticon
+        </Link>
       </div>
     </FooterContainer>
   );

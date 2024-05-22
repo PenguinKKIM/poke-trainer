@@ -49,7 +49,7 @@ function TextForm() {
 
   const onSubmitText = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!currentUser || text === "" || text.length > 180) return;
+    if (!currentUser || text === "" || text.length > 2000) return;
     setLoading(true);
     try {
       Swal.fire({

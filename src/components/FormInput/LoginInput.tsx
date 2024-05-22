@@ -4,7 +4,7 @@ import { FormContainer, Input, Label } from "./style";
 import onChangeInput from "./OnChangeInput";
 import Swal from "sweetalert2";
 import { auth } from "../../firebase";
-import { AuthErrorCodes, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import { useNavigate } from "react-router-dom";
 
@@ -32,24 +32,49 @@ function LoginInput() {
     onChangeInput(event, setUserPassword);
   };
 
+  const setLoginErrorMessage = (error: FirebaseError) => {
+    let errorMessage = "알 수 없는 오류가 발생했습니다";
+    switch (error.code) {
+      case "auth/invalid-credential":
+        errorMessage = "이메일이나 비밀번호를 다시 확인해주세요";
+        break;
+      case "auth/user-disabled":
+        errorMessage = "사용이 중지된 계정입니다";
+        break;
+      case "auth/user-not-found":
+        errorMessage = "사용자를 찾을 수 없습니다";
+        break;
+      case "auth/network-request-failed":
+        errorMessage = "네트워크 오류가 발생했습니다";
+        break;
+      default:
+        errorMessage = "오류가 발생했습니다: " + error.message;
+        break;
+    }
+    setFireBaseError(errorMessage);
+  };
+
   const onSubmitLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const setErrorEmpty = () => {
+      setPasswordError("");
+      setEmailError("");
+    };
     switch (true) {
       case loading:
         setLoading(true);
         return;
       case userEmail === "":
+        setErrorEmpty();
         setEmailError("이메일을 입력해 주세요");
-        setPasswordError("");
         break;
       case userPassword === "":
-        setEmailError("");
+        setErrorEmpty();
         setPasswordError("패스워드를 입력해주세요");
         break;
       default:
+        setErrorEmpty();
         setLoading(true);
-        setEmailError("");
-        setPasswordError("");
         try {
           await signInWithEmailAndPassword(auth, userEmail, userPassword);
           Swal.fire({
@@ -62,19 +87,7 @@ function LoginInput() {
           });
         } catch (error) {
           if (error instanceof FirebaseError) {
-            let errorMessage = "알 수 없는 오류가 발생했습니다";
-            switch (error.code) {
-              case AuthErrorCodes.INVALID_APP_CREDENTIAL:
-                errorMessage = "등록되지 않은 계정 입니다";
-                break;
-              case AuthErrorCodes.NETWORK_REQUEST_FAILED:
-                errorMessage = "네트워크 오류가 발생했습니다";
-                break;
-              default:
-                errorMessage = "오류가 발생했습니다: " + error.message;
-                break;
-            }
-            setFireBaseError(errorMessage);
+            setLoginErrorMessage(error);
           }
         } finally {
           setLoading(false);
@@ -100,7 +113,7 @@ function LoginInput() {
       });
     } catch (error) {
       if (error instanceof FirebaseError) {
-        console.log(error.message);
+        setLoginErrorMessage(error);
       }
     } finally {
       setLoading(false);
@@ -145,10 +158,13 @@ function LoginInput() {
         <span>{passwordError}</span>
       </Label>
 
-      <NormalButton type="submit" fontcolor="white" btncolor="#0000FF">
+      <NormalButton type="submit" fontcolor="white" btncolor="var(--water)">
         로그인
       </NormalButton>
-      <NormalButton onClick={handleGoogleLogin}>구글 로그인</NormalButton>
+      <NormalButton onClick={handleGoogleLogin}>
+        <img src="image/icon/google_icon.png" />
+        구글 로그인
+      </NormalButton>
       <span>{fireBaseError}</span>
     </FormContainer>
   );

@@ -5,6 +5,7 @@ import LoginPage from "../pages/Login";
 import SignUpPage from "../pages/SignUp";
 import RaidPage from "../pages/Raid";
 import Write from "../pages/Raid/Write";
+import MyPagePage from "../pages/MyPage";
 
 const Router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const Router = createBrowserRouter([
       {
         path: "raid/write",
         element: <Write />,
+      },
+      {
+        path: "mypage",
+        element: <MyPagePage />,
       },
     ],
   },
