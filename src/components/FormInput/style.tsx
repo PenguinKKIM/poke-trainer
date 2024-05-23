@@ -98,13 +98,14 @@ export const ButtonContainer = styled.div`
 `;
 
 export const UserContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   background-color: plum;
   border: 3px solid var(--water);
   border-radius: 10px;
-  padding: 1rem;
   gap: 1rem;
+  margin-bottom: 2rem;
 `;
 
 export const UserImage = styled.img`

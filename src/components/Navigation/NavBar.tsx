@@ -6,8 +6,10 @@ function NavBar(props: { toggle: boolean }) {
     <>
       <NavUl toggle={props.toggle}>
         <NavLi>
-          <img src="/image/icon/ditto_icon.png" alt="메타몽아이콘" />
-          등록 트레이너 보기
+          <Link to="trainerlist">
+            <img src="/image/icon/ditto_icon.png" alt="메타몽아이콘" />
+            등록 트레이너 보기
+          </Link>
         </NavLi>
         <NavLi>
           <Link to="raid">

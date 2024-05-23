@@ -8,7 +8,7 @@ function Home() {
       <HomeTitle>포켓몬 고 트레이너 등록시스템</HomeTitle>
       <HomeUl>
         <NavLi>
-          <Link to="login">트레이너 리스트 보기</Link>
+          <Link to="trainerlist">트레이너 리스트 보기</Link>
         </NavLi>
         <NavLi>
           <Link to="raid">레이드/체육관 모집 글 보기</Link>

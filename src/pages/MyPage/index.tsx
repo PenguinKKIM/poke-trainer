@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import MyPage from "../../components/FormInput/MyPage";
+import MyPage from "../../components/Mypage/MyPage";
 
 function MyPagePage() {
   return (
