@@ -1,26 +1,28 @@
-import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { NavLi, NavUl } from "./style";
 
-const NavUl = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-weight: 700;
-`;
-
-const NavLi = styled.li`
-  background-color: aliceblue;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-`;
-
-function NavBar() {
+function NavBar(props: { toggle: boolean }) {
   return (
     <>
-      <NavUl>
-        <NavLi>등록 트레이너 보기</NavLi>
-        <NavLi>트레이너 등록 하기</NavLi>
-        <NavLi>레이드 구해요</NavLi>
-        <NavLi>포켓몬 리스트 보기</NavLi>
+      <NavUl toggle={props.toggle}>
+        <NavLi>
+          <Link to="trainerlist">
+            <img src="/image/icon/ditto_icon.png" alt="메타몽아이콘" />
+            등록 트레이너 보기
+          </Link>
+        </NavLi>
+        <NavLi>
+          <Link to="raid">
+            <img src="/image/icon/success_icon.png" alt="메타몽아이콘" />
+            레이드 구해요
+          </Link>
+        </NavLi>
+        <NavLi>
+          <Link to="mypage">
+            <img src="/image/icon/pika_icon.png" alt="메타몽아이콘" />
+            마이 페이지
+          </Link>
+        </NavLi>
       </NavUl>
     </>
   );

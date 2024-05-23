@@ -14,19 +14,39 @@ export const NormalButton = styled.button<ButtonProps>`
   border: none;
   border: 1px solid gray;
   border-radius: 10px;
-
   background-color: ${(props) => props.btncolor};
   font-size: ${(props) => props.fontsize};
   color: ${(props) => props.fontcolor};
 
+  img {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+  }
   &:hover {
     cursor: pointer;
+    transition: 0.2s;
     background-color: ${(props) => {
-      return `${props.btncolor}7f`;
-    }};
+    let btnHoverColor;
+    switch (props.btncolor) {
+      case "var(--grass)":
+        btnHoverColor = "var(--bug)";
+        break;
+      case "var(--water)":
+        btnHoverColor = "var(--ice)";
+        break;
+      case "var(--poke-dex-red)":
+        btnHoverColor = "var(--psychic)";
+        break;
+      default:
+        btnHoverColor = `${props.btncolor}7f`;
+    }
+    return btnHoverColor;
+  }};
   }
 `;
 
 export const MiddleButton = styled(NormalButton)`
   width: 50%;
+  padding: 0.5rem;
 `;

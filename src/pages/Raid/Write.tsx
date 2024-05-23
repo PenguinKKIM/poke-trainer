@@ -1,20 +1,23 @@
-import LoginInput from "../../components/FormInput/LoginInput";
 import styled from "styled-components";
+import TextForm from "../../components/FormInput/TextForm";
 
-function LoginPage() {
+function Write() {
   return (
-    <FormContainer>
-      <LoginInput />
-    </FormContainer>
+    <>
+      <FormContainer>
+        <TextForm />
+      </FormContainer>
+    </>
   );
 }
+
 const FormContainer = styled.div`
   width: 80%;
-  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 2rem;
   background-color: var(--color-prime);
   border-radius: 10px;
   border: 2px solid var(--water);
@@ -22,4 +25,5 @@ const FormContainer = styled.div`
     width: 60%;
   }
 `;
-export default LoginPage;
+
+export default Write;
