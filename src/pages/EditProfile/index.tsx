@@ -1,13 +1,14 @@
-import LoginInput from "../../components/FormInput/LoginInput";
 import styled from "styled-components";
+import EditProfile from "../../components/Mypage/EditProfile";
 
-function LoginPage() {
+function EditProfilePage() {
   return (
     <FormContainer>
-      <LoginInput />
+      <EditProfile />
     </FormContainer>
-  );
+  )
 }
+
 const FormContainer = styled.div`
   width: 80%;
   padding: 2rem;
@@ -22,4 +23,5 @@ const FormContainer = styled.div`
     width: 60%;
   }
 `;
-export default LoginPage;
+
+export default EditProfilePage;

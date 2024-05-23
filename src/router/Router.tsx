@@ -6,8 +6,8 @@ import SignUpPage from "../pages/SignUp";
 import RaidPage from "../pages/Raid";
 import Write from "../pages/Raid/Write";
 import MyPagePage from "../pages/MyPage";
-import EditProfile from "../components/Mypage/EditProfile";
-import TrainerList from "../components/TrainerList/TrainerList";
+import EditProfilePage from "../pages/EditProfile";
+import TrainerListPage from "../pages/TrainerList";
 
 const Router = createBrowserRouter([
   {
@@ -40,11 +40,11 @@ const Router = createBrowserRouter([
       },
       {
         path: "editprofile",
-        element: <EditProfile />,
+        element: <EditProfilePage />,
       },
       {
         path: "trainerlist",
-        element: <TrainerList />,
+        element: <TrainerListPage />,
       },
     ],
   },

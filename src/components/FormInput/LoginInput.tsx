@@ -1,4 +1,4 @@
-import { NormalButton } from "../Buttons/Buttons";
+import { MiddleButton, NormalButton } from "../Buttons/Buttons";
 import { useEffect, useRef, useState } from "react";
 import { FormContainer, Input, Label } from "./style";
 import onChangeInput from "./OnChangeInput";
@@ -7,6 +7,7 @@ import { auth } from "../../firebase";
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 function LoginInput() {
   const navigate = useNavigate();
@@ -128,8 +129,20 @@ function LoginInput() {
     }
   }, [emailError, passwordError]);
 
+  const linkToJoin = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate("/signup");
+  }
+
   return (
     <FormContainer onSubmit={onSubmitLogin}>
+      <TitleContainer>
+        <div>
+          <img src="/image/icon/ditto_icon.png" alt="메타" />
+          <h2>로그인</h2>
+        </div>
+        <MiddleButton btncolor="var(--grass)" fontcolor="var(--color-prime)" onClick={linkToJoin}>회원가입 하러가기</MiddleButton>
+      </TitleContainer>
       <Label htmlFor="userEmail">
         이메일
         <Input
@@ -169,5 +182,25 @@ function LoginInput() {
     </FormContainer>
   );
 }
+
+const TitleContainer = styled.div`
+width: 100%;
+display: flex;
+justify-content: space-between;
+margin-bottom: 1rem;
+  div{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  img{
+    width: 2rem;
+    height: 2rem;
+  }
+  button{
+    width: 15%;
+  }
+`;
+
 
 export default LoginInput;

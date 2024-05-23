@@ -5,7 +5,8 @@ import { NavLi } from "../../components/Navigation/style";
 function Home() {
   return (
     <HomeContainer>
-      <HomeTitle>포켓몬 고 트레이너 등록시스템</HomeTitle>
+      <HomeTitle>
+        <img src="/image/logo/title_logo.gif" alt="" />포켓몬 트레이너</HomeTitle>
       <HomeUl>
         <NavLi>
           <Link to="trainerlist">트레이너 리스트 보기</Link>
@@ -13,13 +14,27 @@ function Home() {
         <NavLi>
           <Link to="raid">레이드/체육관 모집 글 보기</Link>
         </NavLi>
-        <NavLi>트레이너 등록하기</NavLi>
+        <NavLi>
+          <Link to="mypage">
+            마이 페이지
+          </Link>
+        </NavLi>
       </HomeUl>
     </HomeContainer>
   );
 }
 const HomeTitle = styled.h1`
   font-size: 1.5rem;
+  background-color: aliceblue;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 2px solid var(--water);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  img{
+    width:5rem;
+  }
 `;
 const HomeUl = styled.ul`
   display: flex;

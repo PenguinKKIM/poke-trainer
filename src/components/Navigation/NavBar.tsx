@@ -23,10 +23,6 @@ function NavBar(props: { toggle: boolean }) {
             마이 페이지
           </Link>
         </NavLi>
-        <NavLi>
-          <img src="/image/icon/ball_icon.png" alt="메타몽아이콘" />
-          포켓몬 리스트 보기
-        </NavLi>
       </NavUl>
     </>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { auth, dataBase } from "../../firebase";
-import { Timestamp, collection, getDocs, limit, orderBy, query, startAfter } from "firebase/firestore";
+import { Timestamp, collection, deleteDoc, doc, getDocs, limit, orderBy, query, startAfter, updateDoc } from "firebase/firestore";
 import Loading from "../Loading/Loading";
 import { useNavigate } from "react-router-dom";
 import { TextContainer, TextHeaderContainer, TextLi, TextUl } from "../Navigation/style";
@@ -29,7 +29,7 @@ function RaidList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const ITEMS_PER_PAGE = 1;
+  const ITEMS_PER_PAGE = 5;
 
   const fetchData = async (page: number) => {
     setLoading(true);
@@ -69,23 +69,70 @@ function RaidList() {
     fetchData(currentPage);
   }, [currentPage]);
 
-  const editText = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    Swal.fire({
-      html: "<p> 수정 하시겠습니까 ? </p>",
+  const editText = async (raid: Raid) => {
+    const { value: formValues } = await Swal.fire({
+      title: '글 수정',
+      html: `<div style="display: flex; align-items: center; flex-direction: column;">` +
+        `<select id="swal-input1" class="swal2-input">
+          <option value="레이드" ${raid.category === "레이드" ? "selected" : ""}>레이드</option>
+          <option value="체육관" ${raid.category === "체육관" ? "selected" : ""}>체육관</option>
+        </select>` +
+        `<textarea id="swal-input2" class="swal2-textarea" placeholder="내용" style="resize: none;">${raid.text}</textarea>`
+        + `</div>`,
+      focusConfirm: false,
+      preConfirm: () => {
+        return [
+          (document.getElementById('swal-input1') as HTMLSelectElement).value,
+          (document.getElementById('swal-input2') as HTMLTextAreaElement).value
+        ];
+      },
       showCancelButton: true,
-      showConfirmButton: true,
     });
+
+    if (formValues) {
+      const [category, text] = formValues;
+      try {
+        const raidDoc = doc(dataBase, "raid", raid.id);
+        await updateDoc(raidDoc, { category, text });
+        fetchData(currentPage);
+        Swal.fire({
+          html: "<p>수정 되었습니다!</p>",
+          showCancelButton: true,
+        });
+      } catch (error) {
+        console.error("Error updating document: ", error);
+        Swal.fire({
+          html: "<p>오류가 발생했습니다</p>",
+          showCancelButton: true,
+        });
+      }
+    }
   };
 
-  const deldteText = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    Swal.fire({
-      html: "<p> 삭제 하시겠습니까 ? </p>",
+
+  const deleteText = async (raid: Raid) => {
+    const result = await Swal.fire({
+      html: "<p>삭제 하시겠습니까?</p>",
       showCancelButton: true,
       showConfirmButton: true,
     });
+
+    if (result.isConfirmed) {
+      try {
+        const raidDoc = doc(dataBase, "raid", raid.id);
+        await deleteDoc(raidDoc);
+        fetchData(currentPage);
+        Swal.fire({
+          html: "<p>삭제 되었습니다!</p>",
+          showCancelButton: true,
+        });
+      } catch (error) {
+        console.error("Error deleting document: ", error);
+        Swal.fire('오류가 발생했습니다.', '', 'error');
+      }
+    }
   };
+
   const handlePrevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
@@ -109,7 +156,13 @@ function RaidList() {
         <Loading />
       ) : (
         <>
-          {!currentUser ? <></> : <MiddleButton onClick={handleToWrite}>글 등록하기</MiddleButton>}
+          <TitleContainer>
+            <div>
+              <img src="/image/icon/ditto_icon.png" alt="메타" />
+              <h2>레이드/ 체육관 게시판</h2>
+            </div>
+            {!currentUser ? <></> : <MiddleButton fontcolor="var(--color-prime)" btncolor="var(--grass)" onClick={handleToWrite}>글 등록하기</MiddleButton>}
+          </TitleContainer>
           {raidList.length === 0 ? (
             <div>등록된 글이 없습니다</div>
           ) : (
@@ -131,8 +184,8 @@ function RaidList() {
                   </TextContainer>
                   {currentUser?.uid === raid.userId ? (
                     <ButtonContainer>
-                      <MiddleButton onClick={editText}>수정하기</MiddleButton>
-                      <MiddleButton onClick={deldteText} fontcolor="var(--color-prime)" btncolor="var(--poke-dex-red)">
+                      <MiddleButton onClick={() => editText(raid)}>수정하기</MiddleButton>
+                      <MiddleButton onClick={() => deleteText(raid)} fontcolor="var(--color-prime)" btncolor="var(--poke-dex-red)">
                         삭제하기
                       </MiddleButton>
                     </ButtonContainer>
@@ -173,6 +226,26 @@ const PaginationButton = styled.button`
   &:disabled {
     background-color: gray;
     cursor: not-allowed;
+  }
+`;
+
+
+const TitleContainer = styled.div`
+width: 100%;
+display: flex;
+justify-content: space-between;
+margin-bottom: 1rem;
+  div{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  img{
+    width: 2rem;
+    height: 2rem;
+  }
+  button{
+    width: 10%;
   }
 `;
 export default RaidList;

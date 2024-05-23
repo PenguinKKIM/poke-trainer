@@ -27,22 +27,22 @@ export const NormalButton = styled.button<ButtonProps>`
     cursor: pointer;
     transition: 0.2s;
     background-color: ${(props) => {
-      let btnHoverColor;
-      switch (props.btncolor) {
-        case "var(--grass)":
-          btnHoverColor = "var(--bug)";
-          break;
-        case "var(--water)":
-          btnHoverColor = "var(--ice)";
-          break;
-        case "var(--poke-dex-red)":
-          btnHoverColor = "var(--psychic)";
-          break;
-        default:
-          btnHoverColor = `${props.btncolor}7f`; // 기본적으로 원래 색상에 투명도를 추가
-      }
-      return btnHoverColor;
-    }};
+    let btnHoverColor;
+    switch (props.btncolor) {
+      case "var(--grass)":
+        btnHoverColor = "var(--bug)";
+        break;
+      case "var(--water)":
+        btnHoverColor = "var(--ice)";
+        break;
+      case "var(--poke-dex-red)":
+        btnHoverColor = "var(--psychic)";
+        break;
+      default:
+        btnHoverColor = `${props.btncolor}7f`;
+    }
+    return btnHoverColor;
+  }};
   }
 `;
 

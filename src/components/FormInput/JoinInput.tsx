@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NormalButton } from "../Buttons/Buttons";
+import { MiddleButton, NormalButton } from "../Buttons/Buttons";
 import onChangeInput from "./OnChangeInput";
 import { ErrorMessage, FormContainer, Input, Label } from "./style";
 import Swal from "sweetalert2";
@@ -8,6 +8,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
+import styled from "styled-components";
 
 function JoinInput() {
   const navigate = useNavigate();
@@ -117,13 +118,23 @@ function JoinInput() {
         }
     }
   };
-
+  const linkToLogin = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate("/login");
+  }
   return (
     <>
       {loading ? (
         <Loading />
       ) : (
         <FormContainer onSubmit={onSubmitJoin}>
+          <TitleContainer>
+            <div>
+              <img src="/image/icon/ditto_icon.png" alt="메타" />
+              <h2>회원가입</h2>
+            </div>
+            <MiddleButton btncolor="var(--grass)" fontcolor="var(--color-prime)" onClick={linkToLogin}>로그인 하러가기</MiddleButton>
+          </TitleContainer>
           <Label htmlFor="userId">
             닉네임
             <Input
@@ -181,5 +192,22 @@ function JoinInput() {
     </>
   );
 }
-
+const TitleContainer = styled.div`
+width: 100%;
+display: flex;
+justify-content: space-between;
+margin-bottom: 1rem;
+  div{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  img{
+    width: 2rem;
+    height: 2rem;
+  }
+  button{
+    width: 15%;
+  }
+`;
 export default JoinInput;

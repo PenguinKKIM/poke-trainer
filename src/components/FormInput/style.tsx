@@ -84,7 +84,13 @@ export const DropdownList = styled.ul`
 export const ListItem = styled.li`
   padding: 1rem;
   background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   cursor: pointer;
+  &:hover{
+    background-color: aliceblue;
+  }
 `;
 
 export const ButtonContainer = styled.div`
@@ -97,11 +103,55 @@ export const ButtonContainer = styled.div`
   }
 `;
 
-export const UserContainer = styled.div`
+interface UserContainerProps {
+  backcolor?: string;
+  backImg?: string;
+}
+
+export const UserContainer = styled.div<UserContainerProps>`
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: plum;
+
+  background-color: ${(props) => {
+    let userBackColor;
+    switch (props.backcolor) {
+      case "미스틱":
+        userBackColor = "var(--ice)"
+        break;
+      case "발로":
+        userBackColor = "var(--fire)"
+        break;
+      case "인스팅트":
+        userBackColor = "var(--electric)"
+        break;
+      default:
+        userBackColor = "var(--normal)"
+    }
+    return userBackColor;
+  }};
+
+  background-image: ${(props) => {
+    let backImg;
+    switch (props.backImg) {
+      case "미스틱":
+        backImg = "url(image/icon/articuno_icon.png)"
+        break;
+      case "발로":
+        backImg = "url(image/icon/fire_icon.png)"
+        break;
+      case "인스팅트":
+        backImg = "url(image/icon/thunder_icon.png)"
+        break;
+      default:
+        backImg = "url()"
+    }
+    return backImg;
+  }};
+
+background-repeat: no-repeat;
+  background-position: 90% 20%;
+
   border: 3px solid var(--water);
   border-radius: 10px;
   gap: 1rem;
@@ -112,3 +162,62 @@ export const UserImage = styled.img`
   width: 100px;
   height: 100px;
 `;
+
+
+export const CardHeader = styled.h3`
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  img {
+    width: 1.2rem;
+    background-color: aliceblue;
+    padding: 0.2rem;
+    border-radius: 10px;
+  }
+`;
+
+export const CardId = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+`;
+
+export const BaseStyle = styled.div`
+  font-size: 0.8rem;
+  background-color: aliceblue;
+  padding: 0.5rem 0.3rem;
+  border-radius: 10px;
+  border: 1.5px solid var(--water);
+`;
+
+export const UserName = styled(BaseStyle)`
+  span {
+    font-size: 1rem;
+  }
+`;
+export const Code = styled(UserName)``;
+
+export const CardImg = styled(BaseStyle)`
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+`;
+
+export const Time = styled.div``;
+export const Context = styled.div``;
+
+export const CardImgText = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+`;
+
+export const Card = styled.div`
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+export const CardGreetings = styled(BaseStyle)``;
