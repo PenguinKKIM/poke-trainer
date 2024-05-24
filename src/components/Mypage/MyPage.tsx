@@ -3,12 +3,14 @@ import {
   ButtonContainer,
   Card,
   CardGreetings,
+  CardGreetingsTitle,
   CardHeader,
   CardId,
   CardImg,
   CardImgText,
   Code,
   Context,
+  Faction,
   Time,
   UserContainer,
   UserImage,
@@ -190,11 +192,13 @@ function MyPage() {
                     <CardImgText>
                       <div>
                         <Time>주로 플레이 하는 시간</Time>
-                        <Context>{userData.playTime || "플레이시간을 입력해주세요."}</Context>
+                        <Context backcolor={userData.faction}>
+                          {userData.playTime || "플레이시간을 입력해주세요."}
+                        </Context>
                       </div>
                       <div>
-                        <div>진영</div>
-                        <Context>{userData.faction || "진영을 입력해주세요."}</Context>
+                        <Faction>진영</Faction>
+                        <Context backcolor={userData.faction}>{userData.faction || "진영을 입력해주세요."}</Context>
                       </div>
                     </CardImgText>
                     <UserImage
@@ -203,8 +207,10 @@ function MyPage() {
                     />
                   </CardImg>
                   <CardGreetings>
-                    <div>인사말</div>
-                    <p>{userData.greeting || "여기에는 인사말이 들어가겠죵"}</p>
+                    <CardGreetingsTitle>인사말</CardGreetingsTitle>
+                    <Context backcolor={userData.faction}>
+                      {userData.greeting || "여기에는 인사말이 들어가겠죵"}
+                    </Context>
                   </CardGreetings>
                 </>
               ) : (

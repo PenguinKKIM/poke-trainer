@@ -205,13 +205,45 @@ export const CardImg = styled(BaseStyle)`
   gap: 0.5rem;
 `;
 
-export const Time = styled.div``;
-export const Context = styled.div``;
+export const Time = styled.div`
+  margin: 0.5rem 0;
+`;
+
+export const Faction = styled(Time)``;
+
+interface Context {
+  backcolor?: string;
+}
+
+export const Context = styled.div<Context>`
+  width: 90%;
+  background-color: ${(props) => {
+    let backcolor;
+    switch (props.backcolor) {
+      case "미스틱":
+        backcolor = "var(--water)";
+        break;
+      case "발로":
+        backcolor = "var(--psychic)";
+        break;
+      case "인스팅트":
+        backcolor = "var(--fighting)";
+        break;
+      default:
+        backcolor = "var(--normal)";
+    }
+    return backcolor;
+  }};
+  padding: 0.8rem;
+  border-radius: 10px;
+  text-shadow: var(--text-strock-3px-white);
+`;
 
 export const CardImgText = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 1rem;
 `;
 
 export const Card = styled.div`
@@ -221,4 +253,10 @@ export const Card = styled.div`
   gap: 1rem;
 `;
 
-export const CardGreetings = styled(BaseStyle)``;
+export const CardGreetings = styled(BaseStyle)`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+export const CardGreetingsTitle = styled.div``;

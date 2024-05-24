@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import {
   Card,
   CardGreetings,
+  CardGreetingsTitle,
   CardHeader,
   CardId,
   CardImg,
   CardImgText,
   Code,
   Context,
+  Faction,
   Time,
   UserContainer,
   UserImage,
@@ -83,21 +85,21 @@ function TrainerList() {
                       <CardImgText>
                         <div>
                           <Time>주로 플레이 하는 시간</Time>
-                          <Context>{user.playTime || "플레이시간을 입력해주세요."}</Context>
+                          <Context backcolor={user.faction}>{user.playTime || "플레이시간을 입력해주세요."}</Context>
                         </div>
                         <div>
-                          <div>진영</div>
-                          <Context>{user.faction || "진영을 입력해주세요."}</Context>
+                          <Faction>진영</Faction>
+                          <Context backcolor={user.faction}>{user.faction || "진영을 입력해주세요."}</Context>
                         </div>
                       </CardImgText>
                       <UserImage
-                        src={user.photoURL || user.photoURL || "image/default_profile_img.png"}
-                        alt={user.displayName || user.displayName || "기본 이미지"}
+                        src={user.photoURL || "image/default_profile_img.png"}
+                        alt={user.displayName || "기본 이미지"}
                       />
                     </CardImg>
                     <CardGreetings>
-                      <div>인사말</div>
-                      <p>{user.greeting || "여기에는 인사말이 들어가겠죵"}</p>
+                      <CardGreetingsTitle>인사말</CardGreetingsTitle>
+                      <Context backcolor={user.faction}>{user.greeting || "여기에는 인사말이 들어가겠죵"}</Context>
                     </CardGreetings>
                   </>
                 ) : (
