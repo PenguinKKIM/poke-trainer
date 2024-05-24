@@ -1,12 +1,27 @@
-import styled from "styled-components";
 import { auth, dataBase } from "../../firebase";
-import { ButtonContainer, Card, CardGreetings, CardHeader, CardId, CardImg, CardImgText, Code, Context, Time, UserContainer, UserImage, UserName } from "../FormInput/style";
+import {
+  ButtonContainer,
+  Card,
+  CardGreetings,
+  CardHeader,
+  CardId,
+  CardImg,
+  CardImgText,
+  Code,
+  Context,
+  Time,
+  UserContainer,
+  UserImage,
+  UserName,
+} from "../FormInput/style";
 import { useEffect, useState } from "react";
 import { Timestamp, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { TextContainer, TextHeaderContainer, TextLi, TextUl } from "../Navigation/style";
 import { MiddleButton } from "../Buttons/Buttons";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { HandleNav } from "../Buttons/HandleNav";
+import { TitleContainer } from "../shared/style";
 
 interface Raid {
   id: string;
@@ -53,37 +68,22 @@ function MyPage() {
     }
   }, [currentUser]);
 
-
-  const editProfile = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    navigate("/editprofile");
-  };
-
-  const logInBtn = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    navigate("/login");
-  };
-
-  const signUpBtn = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    navigate("/signup");
-  };
-
   const editText = async (raid: Raid) => {
     const { value: formValues } = await Swal.fire({
-      title: '글 수정',
-      html: `<div style="display: flex; align-items: center; flex-direction: column;">` +
+      title: "글 수정",
+      html:
+        `<div style="display: flex; align-items: center; flex-direction: column;">` +
         `<select id="swal-input1" class="swal2-input">
           <option value="레이드" ${raid.category === "레이드" ? "selected" : ""}>레이드</option>
           <option value="체육관" ${raid.category === "체육관" ? "selected" : ""}>체육관</option>
         </select>` +
-        `<textarea id="swal-input2" class="swal2-textarea" placeholder="내용" style="resize: none;">${raid.text}</textarea>`
-        + `</div>`,
+        `<textarea id="swal-input2" class="swal2-textarea" placeholder="내용" style="resize: none;">${raid.text}</textarea>` +
+        `</div>`,
       focusConfirm: false,
       preConfirm: () => {
         return [
-          (document.getElementById('swal-input1') as HTMLSelectElement).value,
-          (document.getElementById('swal-input2') as HTMLTextAreaElement).value
+          (document.getElementById("swal-input1") as HTMLSelectElement).value,
+          (document.getElementById("swal-input2") as HTMLTextAreaElement).value,
         ];
       },
       showCancelButton: true,
@@ -94,7 +94,7 @@ function MyPage() {
       try {
         const raidDoc = doc(dataBase, "raid", raid.id);
         await updateDoc(raidDoc, { category, text });
-        const updatedRaidList = raidList.map((item) => item.id === raid.id ? { ...item, category, text } : item);
+        const updatedRaidList = raidList.map((item) => (item.id === raid.id ? { ...item, category, text } : item));
         setRaidList(updatedRaidList);
         Swal.fire({
           html: "<p>수정 되었습니다!</p>",
@@ -102,7 +102,7 @@ function MyPage() {
         });
       } catch (error) {
         console.error("Error updating document: ", error);
-        Swal.fire('오류가 발생했습니다.', '', 'error');
+        Swal.fire("오류가 발생했습니다.", "", "error");
       }
     }
   };
@@ -126,11 +126,10 @@ function MyPage() {
         });
       } catch (error) {
         console.error("Error deleting document: ", error);
-        Swal.fire('오류가 발생했습니다.', '', 'error');
+        Swal.fire("오류가 발생했습니다.", "", "error");
       }
     }
   };
-
 
   return (
     <>
@@ -144,8 +143,12 @@ function MyPage() {
           </TitleContainer>
 
           <h2>로그인 해주세요</h2>
-          <MiddleButton style={{ marginTop: "1rem" }} onClick={logInBtn}>로그인 하러가기</MiddleButton>
-          <MiddleButton style={{ marginTop: "1rem" }} onClick={signUpBtn}>회원가입 하러가기</MiddleButton>
+          <MiddleButton style={{ marginTop: "1rem" }} onClick={HandleNav(navigate, "/login")}>
+            로그인 하러가기
+          </MiddleButton>
+          <MiddleButton style={{ marginTop: "1rem" }} onClick={HandleNav(navigate, "/signup")}>
+            회원가입 하러가기
+          </MiddleButton>
         </>
       ) : (
         <>
@@ -154,7 +157,17 @@ function MyPage() {
               <img src="/image/icon/ditto_icon.png" alt="메타" />
               <h2>마이 페이지</h2>
             </div>
-            {!currentUser ? <></> : <MiddleButton fontcolor="var(--color-prime)" btncolor="var(--grass)" onClick={editProfile}>프로필 수정하기</MiddleButton>}
+            {!currentUser ? (
+              <></>
+            ) : (
+              <MiddleButton
+                fontcolor="var(--color-prime)"
+                btncolor="var(--grass)"
+                onClick={HandleNav(navigate, "/editprofile")}
+              >
+                프로필 수정하기
+              </MiddleButton>
+            )}
           </TitleContainer>
           <UserContainer backcolor={userData?.faction} backImg={userData?.faction}>
             <Card>
@@ -224,7 +237,11 @@ function MyPage() {
                 {currentUser?.uid === raid.userId ? (
                   <ButtonContainer>
                     <MiddleButton onClick={() => editText(raid)}>수정하기</MiddleButton>
-                    <MiddleButton onClick={() => deleteText(raid)} fontcolor="var(--color-prime)" btncolor="var(--poke-dex-red)">
+                    <MiddleButton
+                      onClick={() => deleteText(raid)}
+                      fontcolor="var(--color-prime)"
+                      btncolor="var(--poke-dex-red)"
+                    >
                       삭제하기
                     </MiddleButton>
                   </ButtonContainer>
@@ -239,31 +256,5 @@ function MyPage() {
     </>
   );
 }
-
-
-
-const TitleContainer = styled.div`
-width: 100%;
-display: flex;
-justify-content: space-between;
-gap: 1rem;
-margin-bottom: 1rem;
-  div{
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  img{
-    width: 2rem;
-    height: 2rem;
-  }
-  button{
-    width: 15%;
-  }
-`;
-
-
-
-
 
 export default MyPage;

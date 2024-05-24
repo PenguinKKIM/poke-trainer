@@ -18,7 +18,7 @@ import Loading from "../Loading/Loading";
 import Swal from "sweetalert2";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { TitleContainer } from "../shared/style";
 
 function TextForm() {
   const [title, setTitle] = useState("");
@@ -80,11 +80,10 @@ function TextForm() {
     }
   };
 
-
   const backToList = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     navigate(-1);
-  }
+  };
   return (
     <>
       {loading ? (
@@ -97,7 +96,13 @@ function TextForm() {
                 <img src="/image/icon/ditto_icon.png" alt="메타" />
                 <h2>글 작성하기</h2>
               </div>
-              {!currentUser ? <></> : <MiddleButton fontcolor="var(--color-prime)" btncolor="var(--grass)" onClick={backToList}>글 리스트로</MiddleButton>}
+              {!currentUser ? (
+                <></>
+              ) : (
+                <MiddleButton fontcolor="var(--color-prime)" btncolor="var(--grass)" onClick={backToList}>
+                  글 리스트로
+                </MiddleButton>
+              )}
             </TitleContainer>
             <HeaderContainer>
               <Name>작성자 : {currentUser?.displayName}</Name>
@@ -132,22 +137,4 @@ function TextForm() {
     </>
   );
 }
-const TitleContainer = styled.div`
-width: 100%;
-display: flex;
-justify-content: space-between;
-margin-bottom: 1rem;
-  div{
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  img{
-    width: 2rem;
-    height: 2rem;
-  }
-  button{
-    width: 10%;
-  }
-`;
 export default TextForm;

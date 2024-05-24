@@ -1,8 +1,23 @@
 import { collection, getDocs, query } from "firebase/firestore";
 import { dataBase } from "../../firebase";
 import { useEffect, useState } from "react";
-import { Card, CardGreetings, CardHeader, CardId, CardImg, CardImgText, Code, Context, Time, UserContainer, UserImage, UserName } from "../FormInput/style";
-import styled from "styled-components";
+import {
+  Card,
+  CardGreetings,
+  CardHeader,
+  CardId,
+  CardImg,
+  CardImgText,
+  Code,
+  Context,
+  Time,
+  UserContainer,
+  UserImage,
+  UserName,
+} from "../FormInput/style";
+
+import { UserListLi, UserListUl } from "./style";
+import { TitleContainer } from "../shared/style";
 
 interface User {
   id?: string;
@@ -97,29 +112,4 @@ function TrainerList() {
   );
 }
 
-const UserListLi = styled.li`
-  width: 100%;
-`;
-
-const UserListUl = styled.ul`
-  width: 100%;
-`;
-const TitleContainer = styled.div`
-width: 100%;
-display: flex;
-justify-content: space-between;
-margin-bottom: 1rem;
-  div{
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  img{
-    width: 2rem;
-    height: 2rem;
-  }
-  button{
-    width: 10%;
-  }
-`;
 export default TrainerList;

@@ -5,7 +5,16 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useEffect, useRef, useState } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { DropdownContainer, DropdownHeader, DropdownList, DropdownListContainer, FormContainer, Input, Label, ListItem } from "../FormInput/style";
+import {
+  DropdownContainer,
+  DropdownHeader,
+  DropdownList,
+  DropdownListContainer,
+  FormContainer,
+  Input,
+  Label,
+  ListItem,
+} from "../FormInput/style";
 import { NormalButton } from "../Buttons/Buttons";
 import styled from "styled-components";
 
@@ -108,8 +117,6 @@ function EditProfile() {
           친구 코드:
           <Input type="text" value={code} onChange={(e) => setCode(e.target.value)} />
         </Label>
-
-
         <Label>
           주로하는 시간대:
           <Input type="text" value={playTime} onChange={(e) => setPlayTime(e.target.value)} />
@@ -121,9 +128,16 @@ function EditProfile() {
             {isOpen && (
               <DropdownListContainer ref={dropdownRef}>
                 <DropdownList>
-                  <ListItem onClick={() => onCategoryClick("발로")}>팀 발로 <IconImg src="image/icon/fire_icon.png" alt="" /> </ListItem>
-                  <ListItem onClick={() => onCategoryClick("미스틱")}>팀 미스틱 <IconImg src="image/icon/articuno_icon.png" alt="" /></ListItem>
-                  <ListItem onClick={() => onCategoryClick("인스팅트")}>팀 인스팅트<IconImg src="image/icon/thunder_icon.png" alt="" /></ListItem>
+                  <ListItem onClick={() => onCategoryClick("발로")}>
+                    팀 발로 <IconImg src="image/icon/fire_icon.png" alt="" />{" "}
+                  </ListItem>
+                  <ListItem onClick={() => onCategoryClick("미스틱")}>
+                    팀 미스틱 <IconImg src="image/icon/articuno_icon.png" alt="" />
+                  </ListItem>
+                  <ListItem onClick={() => onCategoryClick("인스팅트")}>
+                    팀 인스팅트
+                    <IconImg src="image/icon/thunder_icon.png" alt="" />
+                  </ListItem>
                 </DropdownList>
               </DropdownListContainer>
             )}
@@ -141,7 +155,9 @@ function EditProfile() {
             {photoURL && <ProfileImg src={photoURL} alt={displayName} />}
           </ProfileImgContainer>
         </Label>
-        <NormalButton fontsize="1.2rem" fontcolor="var(--color-prime)" btncolor="var(--grass)" type="submit">업데이트</NormalButton>
+        <NormalButton fontsize="1.2rem" fontcolor="var(--color-prime)" btncolor="var(--grass)" type="submit">
+          업데이트
+        </NormalButton>
       </FormContainer>
     </>
   );

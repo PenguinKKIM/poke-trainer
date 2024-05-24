@@ -161,6 +161,7 @@ export const UserContainer = styled.div<UserContainerProps>`
 export const UserImage = styled.img`
   width: 100px;
   height: 100px;
+  object-fit: cover;
 `;
 
 export const CardHeader = styled.h3`
@@ -168,7 +169,7 @@ export const CardHeader = styled.h3`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  text-overflow: var(--text-strock-3px-white);
+  text-shadow: var(--text-strock-3px-white);
   img {
     width: 1.2rem;
     background-color: aliceblue;

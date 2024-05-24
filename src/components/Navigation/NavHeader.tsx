@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { auth } from "../../firebase";
 import { DisplayNameConatiner, LogoImg, NavHeaderButton, NavHeaderLi, NavHeaderUl } from "./style";
 import Swal from "sweetalert2";
+import { HandleNav } from "../Buttons/HandleNav";
 
 function NavHeader() {
   const navigate = useNavigate();
@@ -33,14 +34,6 @@ function NavHeader() {
       }
     });
   };
-  const handleToLogin = (event: React.MouseEvent) => {
-    event.preventDefault();
-    navigate("/login");
-  };
-  const handleToJoin = (event: React.MouseEvent) => {
-    event.preventDefault();
-    navigate("/signup");
-  };
 
   return (
     <>
@@ -54,10 +47,10 @@ function NavHeader() {
         <NavHeaderLi>
           {currentUser === null ? (
             <>
-              <NavHeaderButton onClick={handleToLogin}>
+              <NavHeaderButton onClick={HandleNav(navigate, "/login")}>
                 <span>로그인</span>
               </NavHeaderButton>
-              <NavHeaderButton onClick={handleToJoin}>
+              <NavHeaderButton onClick={HandleNav(navigate, "/signup")}>
                 <span>회원가입</span>
               </NavHeaderButton>
             </>

@@ -8,7 +8,8 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
-import styled from "styled-components";
+import { HandleNav } from "../Buttons/HandleNav";
+import { TitleContainer } from "../shared/style";
 
 function JoinInput() {
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ function JoinInput() {
   };
 
   const setJoinErrorMessage = (error: FirebaseError) => {
-    let errorMessage = "알 수 없는 오류가 발생했습니다";
+    let errorMessage;
     switch (error.code) {
       case "auth/email-already-in-use":
         errorMessage = "이미 가입 된 이메일 입니다";
@@ -102,7 +103,6 @@ function JoinInput() {
         setLoading(true);
         try {
           const credentials = await createUserWithEmailAndPassword(auth, userEmail, userPassword);
-          console.log(credentials.user);
           await updateProfile(credentials.user, { displayName: userId });
           Swal.fire({
             html: "<p> 회원가입이 완료 되었습니다. </p>",
@@ -118,10 +118,7 @@ function JoinInput() {
         }
     }
   };
-  const linkToLogin = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    navigate("/login");
-  };
+
   return (
     <>
       {loading ? (
@@ -133,7 +130,11 @@ function JoinInput() {
               <img src="/image/icon/ditto_icon.png" alt="메타" />
               <h2>회원가입</h2>
             </div>
-            <MiddleButton btncolor="var(--grass)" fontcolor="var(--color-prime)" onClick={linkToLogin}>
+            <MiddleButton
+              btncolor="var(--grass)"
+              fontcolor="var(--color-prime)"
+              onClick={HandleNav(navigate, "/login")}
+            >
               로그인 하러가기
             </MiddleButton>
           </TitleContainer>
@@ -194,22 +195,5 @@ function JoinInput() {
     </>
   );
 }
-const TitleContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  div {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  img {
-    width: 2rem;
-    height: 2rem;
-  }
-  button {
-    width: 20%;
-  }
-`;
+
 export default JoinInput;
