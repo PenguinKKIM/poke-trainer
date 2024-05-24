@@ -11,12 +11,14 @@ function NavHeader() {
 
   const [showNav, setShowNav] = useState(false);
   const [currentUser, setCurrentUser] = useState(auth.currentUser);
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
     });
     return () => unsubscribe();
   }, []);
+
   const toggleNav = () => {
     setShowNav(!showNav);
   };
