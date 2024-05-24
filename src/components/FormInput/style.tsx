@@ -88,7 +88,7 @@ export const ListItem = styled.li`
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  &:hover{
+  &:hover {
     background-color: aliceblue;
   }
 `;
@@ -117,16 +117,16 @@ export const UserContainer = styled.div<UserContainerProps>`
     let userBackColor;
     switch (props.backcolor) {
       case "미스틱":
-        userBackColor = "var(--ice)"
+        userBackColor = "var(--ice)";
         break;
       case "발로":
-        userBackColor = "var(--fire)"
+        userBackColor = "var(--fire)";
         break;
       case "인스팅트":
-        userBackColor = "var(--electric)"
+        userBackColor = "var(--electric)";
         break;
       default:
-        userBackColor = "var(--normal)"
+        userBackColor = "var(--normal)";
     }
     return userBackColor;
   }};
@@ -135,21 +135,21 @@ export const UserContainer = styled.div<UserContainerProps>`
     let backImg;
     switch (props.backImg) {
       case "미스틱":
-        backImg = "url(image/icon/articuno_icon.png)"
+        backImg = "url(image/icon/articuno_icon.png)";
         break;
       case "발로":
-        backImg = "url(image/icon/fire_icon.png)"
+        backImg = "url(image/icon/fire_icon.png)";
         break;
       case "인스팅트":
-        backImg = "url(image/icon/thunder_icon.png)"
+        backImg = "url(image/icon/thunder_icon.png)";
         break;
       default:
-        backImg = "url()"
+        backImg = "url()";
     }
     return backImg;
   }};
 
-background-repeat: no-repeat;
+  background-repeat: no-repeat;
   background-position: 90% 20%;
 
   border: 3px solid var(--water);
@@ -163,12 +163,12 @@ export const UserImage = styled.img`
   height: 100px;
 `;
 
-
 export const CardHeader = styled.h3`
   font-size: 1.2rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  text-overflow: var(--text-strock-3px-white);
   img {
     width: 1.2rem;
     background-color: aliceblue;

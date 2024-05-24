@@ -121,7 +121,7 @@ function JoinInput() {
   const linkToLogin = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     navigate("/login");
-  }
+  };
   return (
     <>
       {loading ? (
@@ -133,7 +133,9 @@ function JoinInput() {
               <img src="/image/icon/ditto_icon.png" alt="메타" />
               <h2>회원가입</h2>
             </div>
-            <MiddleButton btncolor="var(--grass)" fontcolor="var(--color-prime)" onClick={linkToLogin}>로그인 하러가기</MiddleButton>
+            <MiddleButton btncolor="var(--grass)" fontcolor="var(--color-prime)" onClick={linkToLogin}>
+              로그인 하러가기
+            </MiddleButton>
           </TitleContainer>
           <Label htmlFor="userId">
             닉네임
@@ -193,21 +195,21 @@ function JoinInput() {
   );
 }
 const TitleContainer = styled.div`
-width: 100%;
-display: flex;
-justify-content: space-between;
-margin-bottom: 1rem;
-  div{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  div {
     display: flex;
     align-items: center;
     gap: 1rem;
   }
-  img{
+  img {
     width: 2rem;
     height: 2rem;
   }
-  button{
-    width: 15%;
+  button {
+    width: 20%;
   }
 `;
 export default JoinInput;
