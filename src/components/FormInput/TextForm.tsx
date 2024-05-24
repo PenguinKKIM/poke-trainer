@@ -19,6 +19,7 @@ import Swal from "sweetalert2";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TitleContainer } from "../shared/style";
+import { HandleNav } from "../Buttons/HandleNav";
 
 function TextForm() {
   const [title, setTitle] = useState("");
@@ -80,10 +81,6 @@ function TextForm() {
     }
   };
 
-  const backToList = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    navigate(-1);
-  };
   return (
     <>
       {loading ? (
@@ -99,7 +96,7 @@ function TextForm() {
               {!currentUser ? (
                 <></>
               ) : (
-                <MiddleButton fontcolor="var(--color-prime)" btncolor="var(--grass)" onClick={backToList}>
+                <MiddleButton fontcolor="var(--color-prime)" btncolor="var(--grass)" onClick={HandleNav(navigate, -1)}>
                   글 리스트로
                 </MiddleButton>
               )}
